@@ -46,8 +46,6 @@ for ( x = 0; x < images.length; x++) {
     <img class="borderImg" src="${images[x].url}"</div>`;
 }
 
-
-
 const imgList = document.querySelectorAll('.item');
 imgList[imgAttiva].classList.add('show');
 
@@ -57,40 +55,58 @@ borderImgList[imgAttiva].classList.add('active');
 const prevDom = document.querySelector('.prev');
 const nextDom = document.querySelector('.next');
 
+setInterval(scrollRight, 3000);
+
+borderImgList.forEach(function(elem, i) {
+    elem.addEventListener('click', 
+        function() {
+            removeStyle();
+            imgAttiva = i;
+            imgList[i].classList.add('show');
+            borderImgList[i].classList.add('active');
+        }
+    )
+});
+
 prevDom.addEventListener('click',
     function() {
-        imgList[imgAttiva].classList.remove('show');
-        borderImgList[imgAttiva].classList.remove('active');
-
-        imgAttiva--;
-
-        imgList[imgAttiva].classList.add('show');
-        borderImgList[imgAttiva].classList.add('active');
-
-        nextDom.classList.remove('hidden');
-        
-        if (imgAttiva == 0) {
-            prevDom.classList.add('hidden');
-        }
+        scrollLeft();
     }
 );
 
 nextDom.addEventListener('click',
     function() {
-        imgList[imgAttiva].classList.remove('show');
-        borderImgList[imgAttiva].classList.remove('active');
-
-        imgAttiva++;
-
-        imgList[imgAttiva].classList.add('show');
-        borderImgList[imgAttiva].classList.add('active');
-
-        prevDom.classList.remove('hidden');
-
-        if (imgAttiva == imgList.length - 1) {
-            nextDom.classList.add('hidden');
-        }
+        scrollRight();
     }
 );
 
+function removeStyle() {
+    imgList[imgAttiva].classList.remove('show');
+    borderImgList[imgAttiva].classList.remove('active');
+}
+
+function addStyle() {
+    imgList[imgAttiva].classList.add('show');
+    borderImgList[imgAttiva].classList.add('active');
+}
+
+function scrollRight() {
+    removeStyle();
+    if(imgAttiva == images.length - 1) {
+        imgAttiva = 0;
+    } else {
+        imgAttiva++;
+    }
+    addStyle();
+}
+
+function scrollLeft() {
+    removeStyle();
+    if(imgAttiva == 0) {
+        imgAttiva = images.length - 1;
+    } else {
+        imgAttiva--;
+    }
+    addStyle();
+}
 
