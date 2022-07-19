@@ -27,3 +27,70 @@ const images = [
         description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam.'
     }
 ];
+
+let imgAttiva = 0;
+
+let itemsDom = document.querySelector('.items');
+let imgWrapperDom = document.querySelector('.imgWrapper_container')
+
+for ( x = 0; x < images.length; x++) {
+    itemsDom.innerHTML += ` <div class="item">
+    <img class="carousel_img" src="${images[x].url}" alt="Immagine ${x + 1}">
+    <div class="text-container">
+        <h2>${images[x].title}</h2>
+        <p>${images[x].description}</p>
+    </div>
+    </div>`;
+
+    imgWrapperDom.innerHTML += `<div class="imgWrapper"> 
+    <img class="borderImg" src="${images[x].url}"</div>`;
+}
+
+
+
+const imgList = document.querySelectorAll('.item');
+imgList[imgAttiva].classList.add('show');
+
+const borderImgList = document.querySelectorAll('.borderImg');
+borderImgList[imgAttiva].classList.add('active');
+
+const prevDom = document.querySelector('.prev');
+const nextDom = document.querySelector('.next');
+
+prevDom.addEventListener('click',
+    function() {
+        imgList[imgAttiva].classList.remove('show');
+        borderImgList[imgAttiva].classList.remove('active');
+
+        imgAttiva--;
+
+        imgList[imgAttiva].classList.add('show');
+        borderImgList[imgAttiva].classList.add('active');
+
+        nextDom.classList.remove('hidden');
+        
+        if (imgAttiva == 0) {
+            prevDom.classList.add('hidden');
+        }
+    }
+);
+
+nextDom.addEventListener('click',
+    function() {
+        imgList[imgAttiva].classList.remove('show');
+        borderImgList[imgAttiva].classList.remove('active');
+
+        imgAttiva++;
+
+        imgList[imgAttiva].classList.add('show');
+        borderImgList[imgAttiva].classList.add('active');
+
+        prevDom.classList.remove('hidden');
+
+        if (imgAttiva == imgList.length - 1) {
+            nextDom.classList.add('hidden');
+        }
+    }
+);
+
+
