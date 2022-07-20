@@ -1,4 +1,4 @@
-# Esercizio Boolean - Social Post
+# Esercizio Boolean - Carosello Con Object
 
 * Nome: js-array-objects-carousel
 * Autore: Lupinu Riccardo
