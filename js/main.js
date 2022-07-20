@@ -31,7 +31,7 @@ const images = [
 let imgAttiva = 0;
 
 let itemsDom = document.querySelector('.items');
-let imgWrapperDom = document.querySelector('.imgWrapper_container')
+let imgWrapperDom = document.querySelector('.imgWrapper_container');
 
 for ( x = 0; x < images.length; x++) {
     itemsDom.innerHTML += ` <div class="item">
